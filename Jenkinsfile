@@ -1,3 +1,5 @@
+import java.net.Socket as MySocket
+
 pipeline {
     agent any
 
@@ -13,7 +15,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-              import java.net.Socket as MySocket
+
               script {
                 ports = 1..9000
                 ports.each { port ->
