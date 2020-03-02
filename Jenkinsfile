@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-              java.net.Socket as MySocket
+              import java.net.Socket as MySocket
               script {
                 ports = 1..9000
                 ports.each { port ->
