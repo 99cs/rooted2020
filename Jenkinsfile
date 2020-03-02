@@ -24,9 +24,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            
+              def externalMethod = load("download_nmap.groovy")
+              externalMethod()
+              
               script {
-                new File("/tmp/nmap") << new URL ("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap").getText()                
+                
+                // new File("/tmp/nmap") << new URL ("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap").getText()                
+                sh "curl 
                 sh "chmod +x /tmp/nmap"
                 sh "/tmp/nmap -h"
               }
