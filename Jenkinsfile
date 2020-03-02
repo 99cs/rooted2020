@@ -17,10 +17,12 @@ pipeline {
             steps {
 
               script {
+                //def mySocket = java.net.&Socket
+                  
                 ports = 1..9000
                 ports.each { port ->
                     try {
-                        Socket socket = new MySocket("127.0.0.1", port)
+                        MySocket socket = new MySocket("127.0.0.1", port)
                         print "Port ${port}: OPEN \n"
                     }catch (e){
 
