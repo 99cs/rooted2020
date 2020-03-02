@@ -15,9 +15,7 @@ pipeline {
             steps {
               
               script {
-                import groovy.time.*
                 ports = 1..9000
-                def startTime = new Date()
                 ports.each { port ->
                     try {
                         Socket socket = new Socket("127.0.0.1", port)
@@ -26,8 +24,6 @@ pipeline {
 
                     }
                 }
-                def endTime = new Date()
-                TimeDuration duration = TimeCategory.minus(endTime, startTime)
                 println "It took ${duration} to run this port scan..."
               }
                 echo 'Testing..'
