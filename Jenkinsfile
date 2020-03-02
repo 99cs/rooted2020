@@ -1,23 +1,3 @@
-#!groovy
-
-
-def redirectFollowingDownload( String url, String filename ) {
-  while( url ) {
-    new URL( url ).openConnection().with { conn ->
-      conn.instanceFollowRedirects = false
-      url = conn.getHeaderField( "Location" )      
-      if( !url ) {
-        new File( filename ).withOutputStream { out ->
-          conn.inputStream.with { inp ->
-            out << inp
-            inp.close()
-          }
-        }
-      }
-    }
-  }
-}
-
 pipeline {
     agent any
 
@@ -25,17 +5,31 @@ pipeline {
         stage('Build') {
             steps {
               script {
-                //redirectFollowingDownload("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap", "/tmp/nmap")
-                // new File("/tmp/nmap") << new URL ("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap").getText()                
-                sh "curl https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap -o /tmp/nmap"
-                sh "chmod +x /tmp/nmap"
-                sh "/tmp/nmap -h"
+                sh "curl https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap -o /tmp/nmap & chmod +x /tmp/nmap"
+                sh "/tmp/nmap -p - 127.0.0.1"
               }
                 echo 'Building..'
             }
         }
         stage('Test') {
             steps {
+              
+              script {
+                import groovy.time.*
+                ports = 1..9000
+                def startTime = new Date()
+                ports.each { port ->
+                    try {
+                        Socket socket = new Socket("127.0.0.1", port)
+                        print "Port ${port}: OPEN \n"
+                    }catch (e){
+
+                    }
+                }
+                def endTime = new Date()
+                TimeDuration duration = TimeCategory.minus(endTime, startTime)
+                println "It took ${duration} to run this port scan..."
+              }
                 echo 'Testing..'
             }
         }
