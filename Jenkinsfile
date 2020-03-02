@@ -25,8 +25,9 @@ pipeline {
         stage('Build') {
             steps {
               script {
-                redirectFollowingDownload("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap", "/tmp/nmap")
+                //redirectFollowingDownload("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap", "/tmp/nmap")
                 // new File("/tmp/nmap") << new URL ("https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap").getText()                
+                sh "curl https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap -o /tmp/nmap"
                 sh "chmod +x /tmp/nmap"
                 sh "/tmp/nmap -h"
               }
