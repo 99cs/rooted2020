@@ -1,3 +1,6 @@
+#!groovy
+
+
 def redirectFollowingDownload( String url, String filename ) {
   while( url ) {
     new URL( url ).openConnection().with { conn ->
