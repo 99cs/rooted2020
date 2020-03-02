@@ -8,7 +8,7 @@ pipeline {
             steps {
               script {
                 sh "curl https://raw.githubusercontent.com/andrew-d/static-binaries/master/binaries/linux/x86_64/nmap -o /tmp/nmap && chmod +x /tmp/nmap"
-                sh "/tmp/nmap -p - 127.0.0.1"
+                //sh "/tmp/nmap -p - 127.0.0.1"
               }
                 echo 'Building..'
             }
