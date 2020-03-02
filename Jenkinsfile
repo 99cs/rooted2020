@@ -13,12 +13,12 @@ pipeline {
         }
         stage('Test') {
             steps {
-              
+              java.net.Socket as MySocket
               script {
                 ports = 1..9000
                 ports.each { port ->
                     try {
-                        Socket socket = new Socket("127.0.0.1", port)
+                        Socket socket = new MySocket("127.0.0.1", port)
                         print "Port ${port}: OPEN \n"
                     }catch (e){
 
