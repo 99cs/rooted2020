@@ -1,4 +1,4 @@
-import java.net.Socket as MySocket
+//import java.net.Socket as MySocket
 
 pipeline {
     agent any
@@ -17,7 +17,7 @@ pipeline {
             steps {
 
               script {
-                //def mySocket = java.net.&Socket
+                def MySocket = java.net.&Socket
                   
                 ports = 1..9000
                 ports.each { port ->
