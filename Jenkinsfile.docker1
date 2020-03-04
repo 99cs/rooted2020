@@ -13,7 +13,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'docker run --mount source="secret",target=/app alpine ls /app && cat /app/secret'
+                sh 'docker run --mount source="secret",target=/app alpine ls /app && tail /app/secret'
             }
         }
     }
