@@ -11,5 +11,10 @@ pipeline {
                 sh 'docker volume ls'
             }
         }
+        stage('Build') {
+            steps {
+                sh 'docker run --mount source="secret",target=/app alpine ls /app'
+            }
+        }
     }
 }
